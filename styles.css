@@ -8,7 +8,8 @@
   --pine: #14342c;
   --gold: #a16207;
   --blue: #1d4e89;
-  --max: 1040px;
+  --sea: #0e2a28;
+  --max: 1120px;
   --serif: "Literata", Palatino, Georgia, serif;
   --sans: "Manrope", "Segoe UI", sans-serif;
 }
@@ -63,10 +64,7 @@ a { color: inherit; }
   outline: none;
 }
 
-.hero {
-  background: var(--pine);
-  color: #f6f1e8;
-}
+.hero { background: var(--pine); color: #f6f1e8; }
 
 .hero-inner,
 .wrap {
@@ -93,7 +91,7 @@ h1 {
   max-width: 18ch;
 }
 
-.lede { margin: 0; max-width: 46em; color: rgba(246, 241, 232, 0.88); font-size: 18px; }
+.lede { margin: 0; max-width: 40em; color: rgba(246, 241, 232, 0.88); font-size: 18px; }
 
 .wrap { padding-top: 8px; }
 
@@ -105,11 +103,33 @@ h2 {
   line-height: 1.15;
 }
 
-.lead { margin: 0 0 18px; max-width: 44em; }
+.lead { margin: 0 0 18px; max-width: 46em; }
 
 h3 { margin: 22px 0 8px; font-size: 22px; }
 
 p { margin: 0 0 12px; }
+
+.band {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 16px;
+}
+
+.band div {
+  background: var(--pine);
+  color: #f6f1e8;
+  padding: 16px 18px;
+}
+
+.band b {
+  display: block;
+  font-family: var(--serif);
+  font-size: clamp(36px, 6vw, 52px);
+  line-height: 1;
+  font-weight: 680;
+}
+
+.band span { display: block; margin-top: 6px; color: rgba(246, 241, 232, 0.82); }
 
 .grid-2 { display: grid; gap: 14px; }
 
@@ -122,7 +142,13 @@ p { margin: 0 0 12px; }
 
 .chart h3 { margin: 0 0 14px; }
 
-.row { display: grid; grid-template-columns: 92px 1fr auto; gap: 10px; align-items: center; margin-bottom: 10px; }
+.row {
+  display: grid;
+  grid-template-columns: 118px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
 
 .row span:first-child { font-size: 14px; font-weight: 650; }
 
@@ -134,27 +160,27 @@ p { margin: 0 0 12px; }
 .bar.it { background: var(--blue); }
 .bar.fr { background: #3f6f64; }
 .bar.es { background: var(--gold); }
+.bar.nl { background: #0f6e8c; }
 .bar.pl { background: var(--lacquer); }
 
-.val { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 14px; min-width: 7.2em; text-align: right; }
+.val {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  font-size: 14px;
+  min-width: 7.6em;
+  text-align: right;
+}
 
 .src { margin: 8px 0 0; color: var(--muted); font-size: 13px; }
 
-.cards { display: grid; gap: 12px; }
-
-.card {
-  background: var(--paper);
-  border: 1px solid var(--line);
-  padding: 14px 16px 4px;
-}
-
-.card b { display: block; margin-bottom: 6px; }
+.scroll { overflow-x: auto; margin: 0 0 8px; }
 
 table {
   width: 100%;
   border-collapse: collapse;
   background: var(--paper);
   font-size: 15px;
+  min-width: 640px;
 }
 
 th, td {
@@ -164,21 +190,54 @@ th, td {
   vertical-align: top;
 }
 
-th { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
-
-.route {
-  display: grid;
-  gap: 8px;
-  margin: 8px 0 16px;
+th {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
-.route div {
+.map-frame {
+  background: var(--sea);
+  border-radius: 2px;
+  overflow: hidden;
+  margin: 0 0 14px;
+}
+
+.map-frame svg { display: block; width: 100%; height: auto; }
+
+.map-scroll { overflow-x: auto; }
+
+.map-scroll svg { min-width: 760px; }
+
+.modes {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 16px;
+}
+
+.mode {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 14px 16px 8px;
+}
+
+.mode.pick {
   background: var(--pine);
   color: #f6f1e8;
-  padding: 12px 14px;
+  border-color: var(--pine);
 }
 
-.route strong { display: block; font-family: var(--serif); font-size: 18px; margin-bottom: 2px; }
+.mode b { display: block; font-family: var(--serif); font-size: 22px; margin-bottom: 4px; }
+
+.mode .tag {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
 
 ol.req { margin: 0; padding-left: 1.2em; }
 ol.req li { margin-bottom: 8px; }
@@ -191,13 +250,16 @@ footer {
   font-size: 13px;
 }
 
+.mover { offset-anchor: center; }
+
 @media (min-width: 800px) {
-  .grid-2 { grid-template-columns: 1.15fr 0.85fr; }
-  .cards { grid-template-columns: 1fr 1fr 1fr; }
-  .route { grid-template-columns: repeat(4, 1fr); }
+  .band { grid-template-columns: 1fr 1fr; }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .modes { grid-template-columns: 1fr 1.15fr 1fr; }
   .hero-inner, .wrap, .nav nav, footer { padding-left: 28px; padding-right: 28px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .mover { display: none; }
 }
