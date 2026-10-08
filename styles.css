@@ -190,6 +190,11 @@ th, td {
   vertical-align: top;
 }
 
+tr.hl td {
+  background: #f6e4d6;
+  font-weight: 700;
+}
+
 th {
   font-size: 12px;
   letter-spacing: 0.06em;
