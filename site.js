@@ -1,1 +1,21 @@
-document.querySelectorAll('[data-route]').forEach(button=>button.addEventListener('click',()=>{document.querySelector('.map-frame').dataset.filter=button.dataset.route;document.querySelectorAll('[data-route]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));})); const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){document.querySelectorAll('.nav nav a').forEach(a=>a.classList.toggle('active',a.hash==='#'+entry.target.id));}})},{rootMargin:'-15% 0px -65% 0px'});document.querySelectorAll('main section').forEach(s=>observer.observe(s));window.addEventListener('beforeprint',()=>{document.querySelectorAll('details').forEach(d=>{d.dataset.wasOpen=d.open;d.open=true;});});window.addEventListener('afterprint',()=>{document.querySelectorAll('details').forEach(d=>{d.open=d.dataset.wasOpen==='true';});});
+const tabs = document.querySelectorAll('[data-route]');
+tabs.forEach(button => button.addEventListener('click', () => {
+  document.querySelector('.route-frame').dataset.filter = button.dataset.route;
+  tabs.forEach(tab => tab.setAttribute('aria-pressed', String(tab === button)));
+}));
+const navLinks = [...document.querySelectorAll('.nav nav a')];
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) navLinks.forEach(link => link.classList.toggle('active', link.hash === '#' + entry.target.id));
+    });
+  }, { rootMargin: '-15% 0px -60% 0px' });
+  document.querySelectorAll('.chapter').forEach(section => observer.observe(section));
+}
+document.getElementById('print').addEventListener('click', () => window.print());
+window.addEventListener('beforeprint', () => {
+  document.querySelectorAll('details').forEach(detail => { detail.dataset.wasOpen = String(detail.open); detail.open = true; });
+});
+window.addEventListener('afterprint', () => {
+  document.querySelectorAll('details').forEach(detail => { detail.open = detail.dataset.wasOpen === 'true'; });
+});
